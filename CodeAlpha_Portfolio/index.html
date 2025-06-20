@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Personal Portfolio</title>
+<!-- Google Material Icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and box sizing */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
+  a {
+    color: #0077cc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #005fa3;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #2980b9;
+  }
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+
+  /* Layout */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
+  header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
+  }
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+  nav a {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+  }
+  nav a:hover {
+    background-color: #0077cc;
+    color: white;
+  }
+
+  /* Section Padding */
+  main {
+    padding: 60px 0;
+  }
+  section + section {
+    margin-top: 80px;
+  }
+
+  /* About */
+  #about {
+    text-align: center;
+  }
+  #about .avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #0077cc;
+  }
+  #about p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  .project-title {
+    color: #0077cc;
+    font-size: 1.2rem;
+  }
+  .project-description {
+    color: #555;
+    margin: 12px 0;
+  }
+  .project-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .project-link {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  .project-link:hover {
+    background-color: #005fa3;
+  }
+
+  /* Resume Section */
+  #resume {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+  }
+  .resume-item {
+    margin-bottom: 28px;
+  }
+  .resume-item h4 {
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  .resume-item span {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #777;
+  }
+
+  /* Contact Section */
+  #contact {
+    text-align: center;
+  }
+  #contact p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .contact-link {
+    font-size: 2.2rem;
+    color: #0077cc;
+    transition: color 0.3s;
+  }
+  .contact-link:hover {
+    color: #005fa3;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  main > section {
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.2s;
+  }
+
+  /* Responsive Header */
+  @media (max-width: 700px) {
+    .header-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    nav {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+<header role="banner">
+  <div class="header-inner container">
+    <div class="logo" tabindex="0">Ayushi Ajay Hatwar</div>
+    <nav aria-label="Primary navigation">
+      <a href="#about" class="nav-link" tabindex="0">About</a>
+      <a href="#projects" class="nav-link" tabindex="0">Projects</a>
+      <a href="#resume" class="nav-link" tabindex="0">Resume</a>
+      <a href="#contact" class="nav-link" tabindex="0">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- About Section -->
+  <section id="about" class="container" tabindex="0" aria-labelledby="about-heading">
+    <h2 id="about-heading">About Me</h2>
+    <img src="https://static.vecteezy.com/system/resources/thumbnails/049/855/627/small_2x/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-free-photo.jpg" alt="Ayushi Ajay Hatwar smiling in professional attire" class="avatar" />
+    <p>
+      Aspiring to leverage my academic background and technical skills in a dynamic professional setting. I am eager to contribute to innovative projects in AI/ML and software development, while continuously enhancing my expertise and driving organizational success.
+    </p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="container" tabindex="0" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0" aria-labelledby="project1-title">
+        <h3 class="project-title" id="project1-title">YouTube Video Downloader</h3>
+        <p class="project-description">
+          Developed a web application to download YouTube videos via URLs using yt-dlp integration.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Ayushiii1/youtube-video-downloader" target="_blank" rel="noopener" class="project-link" aria-label="GitHub repository for YouTube Video Downloader">
+            <span class="material-icons" aria-hidden="true">code</span> Code
+          </a>
+          <a href="https://youtube-video-downloader-demo.vercel.app" target="_blank" rel="noopener" class="project-link" aria-label="Live Demo of YouTube Video Downloader">
+            <span class="material-icons" aria-hidden="true">launch</span> Live
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-labelledby="project2-title">
+        <h3 class="project-title" id="project2-title">File Explorer (Tkinter)</h3>
+        <p class="project-description">
+          Created a GUI-based file manager supporting open, browse, copy, move, delete, and search operations.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Ayushiii1/file-explorer" target="_blank" rel="noopener" class="project-link" aria-label="GitHub repository for File Explorer">
+            <span class="material-icons" aria-hidden="true">code</span> Code
+          </a>
+          <a href="https://file-explorer-demo.vercel.app" target="_blank" rel="noopener" class="project-link" aria-label="Live Demo of File Explorer">
+            <span class="material-icons" aria-hidden="true">launch</span> Live
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-labelledby="project3-title">
+        <h3 class="project-title" id="project3-title">Sentiment Analysis Tool</h3>
+        <p class="project-description">
+          Built a sentiment analyzer to classify text as positive, negative, or neutral in real-time using NLP libraries.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Ayushiii1/sentiment-analysis-tool" target="_blank" rel="noopener" class="project-link" aria-label="GitHub repository for Sentiment Analysis Tool">
+            <span class="material-icons" aria-hidden="true">code</span> Code
+          </a>
+          <a href="https://sentiment-analysis-tool-demo.vercel.app" target="_blank" rel="noopener" class="project-link" aria-label="Live Demo of Sentiment Analysis Tool">
+            <span class="material-icons" aria-hidden="true">launch</span> Live
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-labelledby="project4-title">
+        <h3 class="project-title" id="project4-title">URL Shortener</h3>
+        <p class="project-description">
+          Developed a URL shortening tool converting long URLs into compact, shareable links.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Ayushiii1/url-shortener" target="_blank" rel="noopener" class="project-link" aria-label="GitHub repository for URL Shortener">
+            <span class="material-icons" aria-hidden="true">code</span> Code
+          </a>
+          <a href="https://url-shortener-demo.vercel.app" target="_blank" rel="noopener" class="project-link" aria-label="Live Demo of URL Shortener">
+            <span class="material-icons" aria-hidden="true">launch</span> Live
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-labelledby="project5-title">
+        <h3 class="project-title" id="project5-title">Console-Based Python Chatbot</h3>
+        <p class="project-description">
+          Designed a terminal chatbot simulating conversation flow with conditionals.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/Ayushiii1/python-chatbot" target="_blank" rel="noopener" class="project-link" aria-label="GitHub repository for Console-Based Python Chatbot">
+            <span class="material-icons" aria-hidden="true">code</span> Code
+          </a>
+          <a href="https://python-chatbot-demo.vercel.app" target="_blank" rel="noopener" class="project-link" aria-label="Live Demo of Console-Based Python Chatbot">
+            <span class="material-icons" aria-hidden="true">launch</span> Live
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" tabindex="0" aria-labelledby="resume-heading" class="container">
+    <h2 id="resume-heading">Resume</h2>
+    <div class="resume-item">
+      <h3>Objective</h3>
+      <p>
+        Aspiring to leverage my academic background and technical skills in a dynamic professional setting. I am eager to contribute to innovative projects in AI/ML and software development, while continuously enhancing my expertise and driving organizational success.
+      </p>
+    </div>
+    <div class="resume-item">
+      <h3>Skills</h3>
+      <p><strong>Programming Languages:</strong> C, C++, Python</p>
+      <p><strong>Web Designing:</strong> HTML, CSS</p>
+      <p><strong>Databases:</strong> MySQL</p>
+      <p><strong>Other:</strong> Data Structure, Networking, Operating Systems</p>
+    </div>
+    <div class="resume-item">
+      <h3>Projects</h3>
+      <p><strong>YouTube Video Downloader:</strong> Developed a web application to download YouTube videos via URLs using yt-dlp integration.</p>
+      <p><strong>File Explorer (Tkinter):</strong> Created a GUI-based file manager supporting open, browse, copy, move, delete, and search operations.</p>
+      <p><strong>Sentiment Analysis Tool:</strong> Built a sentiment analyzer to classify text as positive, negative, or neutral in real-time using NLP libraries.</p>
+      <p><strong>URL Shortener:</strong> Developed a URL shortening tool converting long URLs into compact, shareable links.</p>
+      <p><strong>Console-Based Python Chatbot:</strong> Designed a terminal chatbot simulating conversation flow with conditionals.</p>
+    </div>
+    <div class="resume-item">
+      <h3>Leadership Experience</h3>
+      <p>Event Organizer for Code Arena coding competition (Debugging, Quiz, Problem Solving)</p>
+      <p>Team Leader guiding frontend/backend integration of AI projects</p>
+      <p>Portfolio Member of National Event Technex – Served as management team member for the event</p>
+    </div>
+    <div class="resume-item">
+      <h3>Education</h3>
+      <h4>B.Tech in Computer Science and Engineering</h4>
+      <span>St. Vincent Pallotti College of Engineering & Technology, Nagpur, Maharashtra, India | CGPA: 7.10</span>
+      <h4>Class XII</h4>
+      <span>R.S.S.G.K Agrawal High School & Jr. College, Tumsar, Maharashtra, India | Percentage: 80% (2021-2022)</span>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container" tabindex="0" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Contact Me</h2>
+    <p>Email: riyasharma2607@gmail.com</p>
+    <p>Phone: 9156686509</p>
+    <p>GitHub: <a href="https://github.com/Ayushiii1" target="_blank" rel="noopener">github.com/Ayushiii1</a></p>
+    <p>
+      Feel free to reach out via any of the platforms above or send an email. I'm open to exciting projects and collaborations.
+    </p>
+    <div class="contact-links" role="group" aria-label="Contact Links">
+      <a href="mailto:riyasharma2607@gmail.com" class="contact-link" aria-label="Send email to Ayushi Hatwar" title="Your Email">
+        <span class="material-icons" aria-hidden="true">email</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ayushi-hatwar-66a41b2570" class="contact-link" target="_blank" rel="noopener" aria-label="Visit LinkedIn Profile" title="LinkedIn">
+        <span class="material-icons" aria-hidden="true">linkedin</span>
+      </a>
+      <a href="https://github.com/Ayushiii1" class="contact-link" target="_blank" rel="noopener" aria-label="Visit GitHub Profile" title="GitHub">
+        <span class="material-icons" aria-hidden="true">github</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Ayushi Ajay Hatwar. All rights reserved.
+</footer>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('nav a.nav-link');
+
+  function activateNavLink() {
+    let scrollPos = window.scrollY + window.innerHeight / 4; // adjust activation offset
+    sections.forEach(section => {
+      if (
+        scrollPos >= section.offsetTop &&
+        scrollPos < section.offsetTop + section.offsetHeight
+      ) {
+        navLinks.for
